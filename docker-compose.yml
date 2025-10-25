@@ -1,0 +1,28 @@
+# EN: Compose runs one container with a named volume for logs.
+# VI: Compose chay 1 container + volume ten cho log.
+services:
+app:
+build: ./app
+container_name: blumonitor_app
+environment:
+LOG_DIR: /app/logs
+LOG_FILE: /app/logs/app.log
+ROTATE_BY: size # or "time"
+MAX_BYTES: 1000000
+BACKUP_COUNT: 5
+ITERATIONS: 0 # 0 = infinite
+LOG_INTERVAL_SEC: 1
+HEALTH_WINDOW_SEC: 120
+volumes:
+- logs:/app/logs
+restart: unless-stopped
+healthcheck:
+# Use Dockerfile healthcheck (kept here for clarity)
+test: ["CMD", "python", "-u", "/app/src/healthcheck.py"]
+interval: 15s
+timeout: 5s
+retries: 5
+
+
+volumes:
+logs: {}
