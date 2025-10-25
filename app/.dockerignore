@@ -1,0 +1,13 @@
+# EN: Exclude local-only and dev files to shrink build context
+# VI: Bo file khong can thiet de build nhe, nhanh
+__pycache__/
+*.pyc
+*.pyo
+*.pytest_cache/
+.git
+.gitignore
+venv
+.env
+.DS_Store
+*.md
+/tests
